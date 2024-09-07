@@ -3,15 +3,13 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-
 export default function Home() {
-  const [categoryList, setCategoryList] = useState([]);
+  const [category, setCategory] = useState([]);
   const { register, handleSubmit } = useForm();
-
   async function fetchCategory() {
     const data = await fetch("http://localhost:3000/api/category");
     const c = await data.json();
-    setCategoryList(c);
+    setCategory(c);
   }
 
   useEffect(() => {
@@ -51,8 +49,8 @@ export default function Home() {
         </div>
       </form>
       <div>
-        <h1>Category ({categoryList.length})</h1>
-        {categoryList.map((category) => (
+        <h1>Category {category.length}</h1>
+        {category.map((category) => (
           <div key={category._id}>
             <Link href={`/product/category/${category._id}`} className="text-red-600">
               {category.name}
