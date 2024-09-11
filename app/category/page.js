@@ -7,7 +7,7 @@ export default function Home() {
   const [category, setCategory] = useState([]);
   const { register, handleSubmit } = useForm();
   async function fetchCategory() {
-    const data = await fetch("http://localhost:3000/api/category");
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/category`);
     const c = await data.json();
     setCategory(c);
   }
@@ -17,13 +17,13 @@ export default function Home() {
   }, []);
 
   function createCategory(data) {
-    fetch("http://localhost:3000/api/category", {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE}/category`), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then(() => fetchCategory());
+    }.then(() => fetchCategory());
   }
 
   return (
@@ -52,7 +52,7 @@ export default function Home() {
         <h1>Category {category.length}</h1>
         {category.map((category) => (
           <div key={category._id}>
-            <Link href={`/product/category/${category._id}`} className="text-red-600">
+            <Link href={`/product/${category._id}`} className="text-red-600">
               {category.name}
             </Link>
           </div>
