@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
  
 export default function Home() {
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
   const [categoryList, setCategoryList] = useState([]);
   const [updateForm, setUpdateForm] = useState(false);
   let idToBeUpdated = null;
